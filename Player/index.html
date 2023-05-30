@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aoboshi+One&family=Noto+Sans+JP&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="painel_video">
+        <div class="video">
+            <video>
+                <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
+            </video>
+            <div class="controles">
+                <div class="barra tempo">
+                    <div class="progresso_tempo"></div>
+                </div>
+                <div class="down">
+                    <button class="play-pause"><img
+                            src="https://media.discordapp.net/attachments/977933870467018792/1112443885042532433/kitty_1.png"
+                            width="50"></button>
+                    <div class="timer">00:00</div>
+                    <div class="vlm"><img
+                            src="https://media.discordapp.net/attachments/977933870467018792/1112442642106683552/volume.png"
+                            width="30">
+                        <div class="barra volume">
+                            <div class="progresso_volume"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="descricao">
+            <div>
+                <h1>Título</h1> <button class="bttplaylist"><img
+                        src="https://media.discordapp.net/attachments/977933870467018792/1112513028534046771/menu.png"
+                        width="25"></button>
+            </div>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum eum totam quis illum perspiciatis
+                distinctio autem officia. Repudiandae, possimus aut laborum deserunt, eaque commodi, odio assumenda enim
+                quibusdam deleniti quae. Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, hic!
+                Corporis autem repellat, molestiae possimus aspernatur reprehenderit neque, obcaecati eligendi rerum
+                accusantium at quis. Ad modi earum corrupti minus odio. Lorem ipsum dolor sit amet consectetur,
+                adipisicing elit. Qui quae sequi rerum recusandae facilis reiciendis accusantium cumque expedita eos, ad
+                explicabo iste dolores eaque vel velit. Dicta, culpa. Voluptatem, temporibus. Lorem ipsum dolor sit amet
+                consectetur, adipisicing elit. Distinctio repellendus natus error debitis officiis at, ea voluptates
+                dolor quas aspernatur rem quo vitae quasi molestias quidem, sit, odio aperiam perspiciatis? Lorem ipsum
+                dolor sit amet consectetur adipisicing elit. Officiis debitis quidem ratione tenetur quis facilis
+                suscipit enim error doloribus, corporis maiores praesentium vitae earum eligendi perferendis quaerat
+                delectus! Harum, iure.</p>
+        </div>
+    </div>
+
+    <div class="playlist">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script>
+        const bttplaylist = document.querySelector('.bttplaylist');
+        const playlist = document.querySelector('.playlist');
+        const videoElement = document.querySelector('video');
+        const progressoTempoDiv = document.querySelector('.progresso_tempo');
+        const progressoVolumeDiv = document.querySelector('.progresso_volume');
+        const barraTempoDiv = document.querySelector('.barra.tempo');
+        const barraVolumeDiv = document.querySelector('.barra.volume');
+        const timerDiv = document.querySelector('.timer');
+        const videoDiv = document.querySelector('.video');
+        const controlesDiv = document.querySelector('.controles');
+        let isExpanded = false;
+
+        bttplaylist.addEventListener('click', function () {
+            if (window.innerWidth <= 890) {
+                playlist.style.width = isExpanded ? '0' : '400px';
+                playlist.style.height = isExpanded ? '0' : '100%';
+            } else {
+                playlist.style.width = isExpanded ? '0' : '100%';
+                playlist.style.height = isExpanded ? '0' : '100%';
+            }
+
+            bttplaylist.classList.toggle('active');
+            bttplaylist.querySelector('img').src = isExpanded ? 'https://media.discordapp.net/attachments/977933870467018792/1112513028534046771/menu.png' : 'https://media.discordapp.net/attachments/977933870467018792/1112513874458067086/menu_1.png';
+
+            isExpanded = !isExpanded;
+        });
+
+
+        function atualizarProgressoTempo() {
+            const duracaoTotal = videoElement.duration;
+            const tempoAtual = videoElement.currentTime;
+            const porcentagem = (tempoAtual / duracaoTotal) * 100;
+            progressoTempoDiv.style.width = porcentagem + '%';
+        }
+
+        function atualizarPosicaoVideo(event) {
+            const barraTempoRetangulo = barraTempoDiv.getBoundingClientRect();
+            const clicouPosX = event.clientX - barraTempoRetangulo.left;
+            const porcentagem = (clicouPosX / barraTempoRetangulo.width) * 100;
+            const duracaoTotal = videoElement.duration;
+            const novaPosicao = (porcentagem / 100) * duracaoTotal;
+            videoElement.currentTime = novaPosicao;
+        }
+
+        function atualizarVolumeVideo(event) {
+            const barraVolumeRetangulo = barraVolumeDiv.getBoundingClientRect();
+            const clicouPosX = event.clientX - barraVolumeRetangulo.left;
+            const porcentagem = (clicouPosX / barraVolumeRetangulo.width) * 100;
+            const novoVolume = porcentagem / 100;
+            videoElement.volume = novoVolume;
+        }
+
+        function atualizarProgressoVolume() {
+            const volumeAtual = videoElement.volume;
+            const porcentagem = volumeAtual * 100;
+            progressoVolumeDiv.style.width = porcentagem + '%';
+        }
+
+        function atualizarProgressoTempoArrastar(event) {
+            if (isDraggingTempo) {
+                const barraTempoRetangulo = barraTempoDiv.getBoundingClientRect();
+                const clicouPosX = event.clientX - barraTempoRetangulo.left;
+                const porcentagem = (clicouPosX / barraTempoRetangulo.width) * 100;
+                progressoTempoDiv.style.width = porcentagem + '%';
+            }
+        }
+
+        function atualizarProgressoVolumeArrastar(event) {
+            if (isDraggingVolume) {
+                const barraVolumeRetangulo = barraVolumeDiv.getBoundingClientRect();
+                const clicouPosX = event.clientX - barraVolumeRetangulo.left;
+                const porcentagem = (clicouPosX / barraVolumeRetangulo.width) * 100;
+                progressoVolumeDiv.style.width = porcentagem + '%';
+            }
+        }
+
+        function atualizarProgressoTempoSoltar(event) {
+            if (isDraggingTempo) {
+                const barraTempoRetangulo = barraTempoDiv.getBoundingClientRect();
+                const clicouPosX = event.clientX - barraTempoRetangulo.left;
+                const porcentagem = (clicouPosX / barraTempoRetangulo.width) * 100;
+                const duracaoTotal = videoElement.duration;
+                const novaPosicao = (porcentagem / 100) * duracaoTotal;
+                videoElement.currentTime = novaPosicao;
+            }
+
+            isDraggingTempo = false;
+        }
+
+        function atualizarProgressoVolumeSoltar(event) {
+            if (isDraggingVolume) {
+                const barraVolumeRetangulo = barraVolumeDiv.getBoundingClientRect();
+                const clicouPosX = event.clientX - barraVolumeRetangulo.left;
+                const porcentagem = (clicouPosX / barraVolumeRetangulo.width) * 100;
+                const novoVolume = porcentagem / 100;
+                videoElement.volume = novoVolume;
+            }
+
+            isDraggingVolume = false;
+        }
+
+        function atualizarTimer() {
+            const duracaoTotal = videoElement.duration;
+            const tempoAtual = videoElement.currentTime;
+
+            const minutos = Math.floor(tempoAtual / 60).toString().padStart(2, '0');
+            const segundos = Math.floor(tempoAtual % 60).toString().padStart(2, '0');
+
+            const timerDiv = document.querySelector('.timer');
+            timerDiv.textContent = minutos + ':' + segundos;
+        }
+
+        videoElement.addEventListener('timeupdate', atualizarTimer);
+
+
+        let isDraggingTempo = false;
+        let isDraggingVolume = false;
+
+        barraTempoDiv.addEventListener('mousedown', function () {
+            isDraggingTempo = true;
+        });
+
+        barraVolumeDiv.addEventListener('mousedown', function () {
+            isDraggingVolume = true;
+        });
+
+        document.addEventListener('mousemove', atualizarProgressoTempoArrastar);
+        document.addEventListener('mousemove', atualizarProgressoVolumeArrastar);
+
+        document.addEventListener('mouseup', atualizarProgressoTempoSoltar);
+        document.addEventListener('mouseup', atualizarProgressoVolumeSoltar);
+
+        videoElement.addEventListener('volumechange', atualizarProgressoVolume);
+
+        barraVolumeDiv.addEventListener('click', atualizarVolumeVideo);
+
+        barraTempoDiv.addEventListener('click', atualizarPosicaoVideo);
+
+        videoElement.addEventListener('timeupdate', atualizarProgressoTempo);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var video = document.querySelector("video");
+            var playPauseButton = document.querySelector(".play-pause");
+
+            playPauseButton.addEventListener("click", function () {
+                if (video.paused) {
+                    video.play();
+                    playPauseButton.innerHTML = '<img src="https://cdn.discordapp.com/attachments/977933870467018792/1112443885436817430/kitty.png" width="50">';
+                } else {
+                    video.pause();
+                    playPauseButton.innerHTML = '<img src="https://media.discordapp.net/attachments/977933870467018792/1112443885042532433/kitty_1.png" width="50">';
+                }
+            });
+        });
+
+        videoDiv.addEventListener('mouseenter', function () {
+            controlesDiv.style.opacity = '100%';
+        });
+
+        videoDiv.addEventListener('mouseleave', function () {
+            controlesDiv.style.opacity = '0%';
+        });
+    </script>
+</body>
+
+</html>

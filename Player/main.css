@@ -1,0 +1,235 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    transition: all 0.5s;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url('https://cdn.discordapp.com/attachments/977933870467018792/1112206685352771664/incrivel-ceu-de-belas-artes-com-nuvens-coloridas.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* background: #202020; */
+
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.painel_video {
+    width: 50%;
+    min-width: 400px;
+    height: 100%;
+    resize: none;
+    overflow-y: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 0 30px 0 #ffffff;
+}
+
+.video {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+video {
+    width: 100%;
+    min-width: 400px;
+    padding: 0;
+    display: block;
+}
+
+.controles {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: max-content;
+    padding: 10px 20px 0 10px;
+    display: flex;
+    flex-direction: column;
+
+    /* border: 3px solid red; */
+    background: linear-gradient(#00000000, #000000ce);
+}
+
+.down {
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.barra {
+    height: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #00000069;
+    display: flex;
+}
+
+.progresso_tempo,
+.progresso_volume{
+    background: #fff;
+    border-radius: 10px;
+    height: auto;
+    transition: all 0s;
+}
+
+.progresso_volume{
+    width: 100%;
+}
+
+.play-pause {
+    background: none;
+    border: none;
+    -webkit-filter: drop-shadow(0px 0px 10px #ffffff);
+}
+
+.timer {
+    font-size: 25px;
+    color: #fff;
+    font-family: 'Aoboshi One', serif;
+}
+
+.vlm {
+    width: 15%;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.volume {
+    width: 100%;
+    min-width: 90px;
+}
+
+.descricao {
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    min-width: 400px;
+    padding: 15px;
+
+
+    background: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    text-align: justify;
+}
+
+.descricao > p {
+    font-size: 20px;
+    padding-right: 10px;
+    max-height:60%;
+    text-align: justify;
+    overflow-y: auto;
+}
+
+.descricao p::-webkit-scrollbar {
+    width: 12px;
+}
+
+.descricao p::-webkit-scrollbar-track {
+    border-radius: 6px;
+}
+
+.descricao p::-webkit-scrollbar-thumb {
+    background: #d4d4d4;
+    border-radius: 6px;
+}
+
+.descricao div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.playlist {
+    /* width: 100%; */
+    overflow-y: auto;
+
+    display: grid;
+    gap: 20px;
+}
+
+.playlist::-webkit-scrollbar {
+    width: 12px;
+}
+
+.playlist::-webkit-scrollbar-track {
+    background: #00000031;
+    border-radius: 6px;
+    /* Fundo transparente */
+}
+
+.playlist::-webkit-scrollbar-thumb {
+    background: #fff;
+    border-radius: 6px;
+}
+
+
+.playlist div {
+    width: 90%;
+    height: 200px;
+    border-radius: 20px;
+
+    margin: 0 auto;
+
+    background: #fff;
+    box-shadow: 0 0 20px 0 #fff;
+}
+
+.bttplaylist {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50px;
+    padding: 25px;
+    align-items: center;
+    background: #fff;
+}
+
+.bttplaylist.active {
+    background: #ff7f50;
+    box-shadow: 0 0 20px 0 #ff7f50;
+}
+
+@media (max-width: 890px) {
+    body{
+        flex-direction: column;
+        align-items: center;
+        overflow-y: auto;
+        padding: 5px;
+    }
+
+    .painel_video{
+        height: max-content;
+    }
+
+    .playlist{
+        margin-top: 10px;
+        width: 0;
+        height: 0;
+    }
+
+    .playlist div{
+        width: 380px;
+        margin: 0;
+    }
+}
