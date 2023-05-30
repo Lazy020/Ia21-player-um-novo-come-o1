@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes</title>
+    <link rel="icon" href="https://stickershop.line-scdn.net/stickershop/v1/product/12465610/LINEStorePC/main.png">
+</head>
+<body>
+    COOL MAN
+  
+    <script>
+          async function main() {
+             const request = await fetch("meus-dados.json")
+             const data = await request.json()
+
+
+             data.forEach(pessoa => {
+                document.body.innerHTML += `<button> 
+                    ${pessoa.nome},
+                    ${pessoa.idade},
+                    ${pessoa.número},
+                    ${pessoa.apelido},
+                    ${pessoa.datanasc}
+                    ${year - pessoa["data-nascimento"][0]},
+                    ${pessoa.Bom ? "BOM" : ""}
+                   </button>`
+             })
+
+        }     
+              
+            main()
+    </script>
+
+</body>
+</html>

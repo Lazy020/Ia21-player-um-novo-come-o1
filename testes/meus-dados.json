@@ -1,0 +1,55 @@
+[
+ {
+    "nome": "Davi",
+    "idade": 10,
+    "número": 999,
+    "apelido": "Nino",
+    "datanasc": [2001,11,19],
+    "Bom": "false"
+
+ },
+
+ {
+    "nome": "Kleber",
+    "idade": 14,
+    "número": 575,
+    "apelido": "Dan",
+    "datanasc": [2009,10, 13],
+    "Bom": "true"
+
+    
+ },
+
+
+ {
+    "nome": "Blum",
+    "idade": 21,
+    "número": 872,
+    "apelido": "Lum",
+    "datanasc": [1988,11,30],
+    "Bom": "true"
+    
+ },
+ 
+ {
+   "nome": "Jake",
+   "idade": 17,
+   "número": 653,
+   "apelido": "Jay",
+   "datanasc": [2000,12,17],
+   "Bom": "false"
+   
+},
+
+{
+   "nome": "Yasmin",
+   "idade": 32,
+   "número": 809,
+   "apelido": "Mimi",
+   "datanasc": [1990,10,21],
+   "Bom": "false"
+   
+}
+
+
+]
